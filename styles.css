@@ -122,6 +122,11 @@ button{font:inherit;color:inherit}
   .hero-visual .portrait{width:min(320px,74%)}
   .portrait .hello{right:-2%;font-size:.95rem;padding:.5rem .9rem}
 }
+@media (max-width:600px){
+  .hero{padding-top:.75rem}
+  .hero-visual{padding-top:0}
+  .hero h1{font-size:clamp(1.6rem,8vw,2.3rem)}
+}
 @media (max-width:600px){.creds{grid-template-columns:1fr}}
 
 /* Logos */
@@ -136,10 +141,10 @@ button{font:inherit;color:inherit}
 .marquee{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
 .marquee-track{display:flex;align-items:center;gap:clamp(2.5rem,5vw,4.5rem);width:max-content;animation:scroll 55s linear infinite;padding-inline:2rem}
 .marquee.paused .marquee-track,.marquee:hover .marquee-track{animation-play-state:paused}
-.featured-logos{display:grid;grid-template-columns:repeat(6,1fr);gap:1.25rem;align-items:center;margin-bottom:1.75rem;padding-bottom:1.75rem;border-bottom:1px solid var(--line)}
+.featured-logos{display:grid;grid-template-columns:repeat(5,1fr);gap:1.25rem;align-items:center;margin-bottom:1.75rem;padding-bottom:1.75rem;border-bottom:1px solid var(--line)}
 .featured-logos li{display:flex;align-items:center;justify-content:center;height:88px}
 .featured-logos img{max-height:80px;max-width:100%;width:auto;object-fit:contain}
-@media (max-width:760px){.featured-logos{grid-template-columns:repeat(3,1fr);gap:1rem 1.25rem}.featured-logos li{height:64px}.featured-logos img{max-height:58px}}
+@media (max-width:760px){.featured-logos{display:flex;flex-wrap:wrap;justify-content:center;gap:1rem 1.25rem}.featured-logos li{flex:0 0 calc((100% - 2.5rem)/3)}.featured-logos li{height:64px}.featured-logos img{max-height:58px}}
 .marquee-track li{flex:none;display:flex;align-items:center;justify-content:center;height:64px}
 .marquee-track img{max-height:58px;max-width:150px;width:auto;object-fit:contain}
 @keyframes scroll{to{transform:translateX(-50%)}}
@@ -237,7 +242,7 @@ button{font:inherit;color:inherit}
 .spark-2{width:20px;top:50%;left:2%;fill:var(--accent);stroke:var(--ink);stroke-width:1.5;animation:twinkle 4s ease-in-out -2s infinite}
 @keyframes twinkle{0%,100%{transform:scale(1) rotate(0)}50%{transform:scale(.75) rotate(20deg)}}
 .hello{position:absolute;right:-2%;bottom:6%;background:var(--ink);color:#fff;font-family:var(--font-display);font-weight:600;font-size:1.05rem;padding:.6rem 1.05rem;border-radius:999px;transform:rotate(-4deg);box-shadow:4px 4px 0 var(--accent);white-space:nowrap}
-.hello span{font-family:var(--font-mono);font-weight:500;font-size:var(--text-xs);color:var(--accent);margin-right:.35rem;text-transform:uppercase;letter-spacing:.06em}
+.hello span{font-family:var(--font-mono);font-weight:500;font-size:var(--text-xs);color:#fff;margin-right:.35rem;text-transform:uppercase;letter-spacing:.06em}
 
 .gd-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1rem,2vw,1.5rem)}
 .gd-grid a{display:flex;align-items:center;justify-content:center;aspect-ratio:4/3;padding:.75rem;background:var(--bg);border:1px solid var(--line);border-radius:var(--r);transition:transform .25s var(--ease),box-shadow .25s,border-color .25s}
