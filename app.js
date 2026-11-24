@@ -109,7 +109,7 @@
 
   // Reveal on scroll (content stays visible without JS)
   if('IntersectionObserver' in window&&!matchMedia('(prefers-reduced-motion: reduce)').matches){
-    var els=document.querySelectorAll('.section-head,.service,.steps li,.about-grid > div,.contact-grid > *');
+    var els=document.querySelectorAll('.section-head,.service,.creds .cred-block,.contact-grid > *');
     var io=new IntersectionObserver(function(entries){
       entries.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target)}});
     },{rootMargin:'0px 0px -8% 0px'});
