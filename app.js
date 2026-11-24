@@ -64,7 +64,8 @@
 
   // Contact form
   var form=document.getElementById('contact-form'),status=document.getElementById('form-status'),fName=document.getElementById('f-name');
-  var ep=['aHR0cHM6Ly9mb3Jtc3VibWl0LmNvL2FqYXgv','YW1hbmRhdGhlY2FycGVudGVyQGdtYWlsLmNvbQ=='];
+  var ep=['aHR0cHM6Ly9mb3Jtc3VibWl0LmNvLw==','YW1hbmRhdGhlY2FycGVudGVyQGdtYWlsLmNvbQ=='];
+  if(/[?&]sent=1/.test(location.search)){status.className='form-status field-full ok';status.textContent='Thanks, your message was sent. Amanda will be in touch soon.';if(history.replaceState)history.replaceState(null,'',location.pathname+'#contact')}
   function setErr(input,msg){
     var e=document.getElementById('e-'+input.id.replace('f-',''));
     if(msg){input.setAttribute('aria-invalid','true');if(e)e.textContent=msg}
@@ -81,30 +82,18 @@
     if(first)first.focus();
     return ok;
   }
+  window.addEventListener('pageshow',function(){var b=form.querySelector('button[type="submit"]');if(b)b.disabled=false});
   form.addEventListener('submit',function(e){
     e.preventDefault();
     status.className='form-status field-full';status.textContent='';
     if(!validate())return;
     if(form._honey.value)return;
     var btn=form.querySelector('button[type="submit"]');btn.disabled=true;
-    var data={
-      name:fName.value.trim(),email:form.email.value.trim(),
-      organization:form.organization.value.trim(),service:form.service.value,
-      message:form.message.value.trim(),
-      _subject:'New website inquiry from '+fName.value.trim(),
-      _replyto:form.email.value.trim(),_template:'table',_captcha:'false'
-    };
-    fetch(atob(ep[0])+atob(ep[1]),{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(data)})
-      .then(function(r){return r.json().catch(function(){return {}}).then(function(j){return {ok:r.ok,j:j}})})
-      .then(function(res){
-        if(res.ok&&String(res.j.success)!=='false'){
-          status.classList.add('ok');status.textContent='Thanks, your message was sent. Amanda will be in touch soon.';form.reset();
-        }else{throw new Error(res.j.message||'Send failed')}
-      })
-      .catch(function(){
-        status.classList.add('bad');status.textContent='Sorry, something went wrong and your message was not sent. Please try again, or reach out on LinkedIn.';
-      })
-      .finally(function(){btn.disabled=false});
+    var extra={_subject:'New website inquiry from '+fName.value.trim(),_replyto:form.email.value.trim(),_template:'table',_captcha:'false',_next:location.origin+location.pathname+'?sent=1#contact'};
+    Object.keys(extra).forEach(function(k){var i=form.querySelector('input[name="'+k+'"]');if(!i){i=document.createElement('input');i.type='hidden';i.name=k;form.appendChild(i)}i.value=extra[k]});
+    form.method='POST';form.action=atob(ep[0])+atob(ep[1]);
+    status.textContent='Sending your message...';
+    HTMLFormElement.prototype.submit.call(form);
   });
 
   // Reveal on scroll (content stays visible without JS)
