@@ -147,6 +147,7 @@ button{font:inherit;color:inherit}
 @media (max-width:760px){.featured-logos{display:flex;flex-wrap:wrap;justify-content:center;gap:1rem 1.25rem}.featured-logos li{flex:0 0 calc((100% - 2.5rem)/3)}.featured-logos li{height:64px}.featured-logos img{max-height:58px}}
 .marquee-track li{flex:none;display:flex;align-items:center;justify-content:center;height:64px}
 .marquee-track img{max-height:58px;max-width:150px;width:auto;object-fit:contain}
+.marquee-track img[src$="logo21.png"]{max-width:190px}
 @keyframes scroll{to{transform:translateX(-50%)}}
 @media (prefers-reduced-motion:reduce){
   .marquee{-webkit-mask-image:none;mask-image:none}
