@@ -109,3 +109,13 @@
     });
   }
 })();
+
+// Back to top: scroll to the very top and return focus to the page start
+document.addEventListener('click',function(e){
+  var a=e.target.closest&&e.target.closest('a[href="#top"]');if(!a)return;
+  e.preventDefault();
+  var smooth=!matchMedia('(prefers-reduced-motion: reduce)').matches;
+  window.scrollTo({top:0,behavior:smooth?'smooth':'auto'});
+  if(history.replaceState)history.replaceState(null,'',location.pathname+location.search);
+  var m=document.getElementById('main');if(m){m.setAttribute('tabindex','-1');m.style.outline='none';m.focus({preventScroll:true})}
+});
